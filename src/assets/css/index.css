@@ -1,0 +1,8 @@
+@import './vant.css';
+
+.card {
+  margin: 0 9px 12px;
+  padding: 20px 12px;
+  background: #ffffff;
+  border-radius: 5px;
+}

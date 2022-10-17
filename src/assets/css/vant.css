@@ -1,0 +1,27 @@
+:root {
+  --van-button-primary-background-color: #0568eb !important;
+  --van-button-primary-border-color: #0568eb !important;
+}
+
+.van-cell {
+  padding: 0 !important;
+}
+
+.van-cell + .van-cell {
+  margin-top: 24px;
+}
+
+.van-cell__title {
+  color: rgba(66, 69, 74, 1);
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.van-field__body input {
+  height: 44px;
+  padding: 0 18px;
+  background: #fbfcfc;
+  border: 1px solid #eaebed;
+  border-radius: 3px;
+}
