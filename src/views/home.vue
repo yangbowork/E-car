@@ -33,7 +33,7 @@
 <style lang="scss">
   .container {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background: url('@/assets/img/home-bg.png') no-repeat;
     background-size: 100%;
     overflow: hidden;

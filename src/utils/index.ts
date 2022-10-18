@@ -33,8 +33,6 @@ export const mutateState = (state: AnyObject, payload: AnyObject) => {
 export const callPhone = (phoneNumber: String) => {
   if (userStore.isIOS) {
     const str = `tel:${phoneNumber}`;
-    // window.location.href = `tel:${phoneNumber}`;
-    // window.location.href = `tel:13564952504`;
     window.location.href = str;
   } else {
     (window as any).call.callPhone(`${phoneNumber}`);

@@ -8,7 +8,7 @@ const routes = [
         path: 'home',
         component: () => import('@/views/home.vue'),
         meta: {
-          title: '浦发银行 E汽融产品',
+          title: 'E汽融产品',
           keepAlive: false,
         },
       },
@@ -24,7 +24,7 @@ const routes = [
         path: 'result',
         component: () => import('@/views/result.vue'),
         meta: {
-          title: '浦发银行 E汽融产品',
+          title: 'E汽融产品',
           keepAlive: false,
           usePathKey: 'result',
         },
