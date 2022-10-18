@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, unref, watch } from 'vue';
+  import { ref } from 'vue';
   import 'vant/es/image-preview/style';
   import { ImagePreview } from 'vant';
   import 'vant/es/toast/style';
@@ -14,6 +14,10 @@
     modelValue: {
       type: Array,
       default: () => [],
+    },
+    name: {
+      type: String,
+      default: '',
     },
     // 图片最大大小，以kb为单位
     maxCount: {
@@ -33,25 +37,12 @@
       type: String,
       default: '点击上传图片',
     },
+    typeID: {
+      type: String,
+    },
   });
 
   const { modelValue } = toRefs(props);
-  console.log('modelValue');
-  console.log(modelValue.value);
-
-  // const pictList = ref([]);
-  // watch(
-  //   () => props.modelValue,
-  //   (newProps) => {
-  //     console.log('更新了', newProps);
-  //     modelValue = newProps;
-  //   },
-  // );
-
-  // const pictList = computed(() => {
-  //   console.log('更新了', props.modelValue);
-  //   return props.modelValue;
-  // });
 
   const uploadIcon = ref();
 
@@ -59,12 +50,10 @@
 
   onMounted(() => {
     uploadStore.isGetCosInfo();
-    window.takePictureCallBack = takePictureCallBack;
   });
 
   const setModelValue = (value) => {
     console.log('setModelValue');
-    console.log(value);
     // emit('update:modelValue', value);
     emit('onUpload', value);
   };
@@ -82,8 +71,6 @@
     console.log('clearPic');
     const arr = modelValue.value;
     arr.splice(index, 1);
-    console.log(modelValue.value);
-    console.log(arr);
     setModelValue(arr);
   };
 
@@ -95,6 +82,7 @@
       uploadIcon.value.click();
     } else {
       showShare.value = true;
+      console.log(props.typeID);
     }
   };
 
@@ -105,9 +93,6 @@
         appPhotograph();
         break;
       case '相册':
-        // takePictureCallBack(
-        //   'https://huangniu-1251117131.cos.ap-shanghai.myqcloud.com/storeLive/20221017/1665985490397_8d83b6278865dc5593e055.jpg',
-        // );
         openImageChooserActivity();
         break;
     }
@@ -118,22 +103,13 @@
   // 打开摄像头
   const appPhotograph = () => {
     console.log('takePicture');
-    window.call.takePicture();
+    window.call.takePicture(props.name);
   };
 
   // 打开相册
   const openImageChooserActivity = () => {
     console.log('openImageChooserActivity');
-    window.call.openImageChooserActivity();
-  };
-
-  // 获取图片
-  const takePictureCallBack = (url) => {
-    console.log('takePictureCallBack', url);
-    console.log(modelValue.value);
-    console.log(props);
-    console.log(url);
-    addImage(url);
+    window.call.openImageChooserActivity(props.name);
   };
 
   // IOS
@@ -169,13 +145,12 @@
   const addImage = (url) => {
     console.log('addImage');
     let arr = modelValue.value;
-    console.log(modelValue.value);
-    console.log(url);
-    // arr.push(url);
-    // console.log(arr.length);
-    // setModelValue(arr);
+    arr.push(url);
+    setModelValue(arr);
     // emit('onUpload');
   };
+
+  defineExpose({ addImage });
 </script>
 
 <template>

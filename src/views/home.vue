@@ -24,7 +24,7 @@
     <div class="inner">
       <div class="title">最高可申请额度(元)</div>
       <img class="money" :src="getImgUrl('home-money.png')" alt="" />
-      <div class="tip">服务费日息万2-2.5</div>
+      <div class="tip">服务费日息万2-2.5，加盟商可享最高优惠</div>
       <van-button round block type="primary" @click="nextPage"> 立即申请 </van-button>
     </div>
   </div>

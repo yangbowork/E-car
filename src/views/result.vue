@@ -9,7 +9,9 @@
   // 0:待审批, 1: 审批成功 2: 已驳回
   const state = ref(0);
 
-  state.value = route.query.state as any;
+  if (route.query.state) {
+    state.value = route.query.state as any;
+  }
 
   const reapply = () => {
     router.push('/info');

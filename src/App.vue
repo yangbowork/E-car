@@ -12,7 +12,7 @@
   </Suspense>
 </template>
 <script lang="ts" setup>
-  // import { getAppToken } from '@/utils/getAppToken';
-  // // 获取app中token和userId
-  // getAppToken();
+  import { getAppToken } from '@/utils/getAppToken';
+  // 获取app中token和userId
+  getAppToken();
 </script>

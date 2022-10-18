@@ -10,6 +10,11 @@
   const router = useRouter();
   const loading = ref(false);
 
+  const businessLicense = ref();
+  const legalIdCard = ref();
+  const operatorIdCard = ref();
+  const licensePermit = ref();
+
   const form: Ref<any> = ref({
     businessLicense: [],
     legalIdCard: [],
@@ -98,11 +103,46 @@
       });
   };
 
-  const onUpload = (key, val) => {
+  onMounted(() => {
+    (window as any).takePictureCallBack = takePictureCallBack;
+  });
+
+  // 获取图片
+  const takePictureCallBack = (str) => {
+    const arr = str.split(',');
+    const url = arr[0];
+    const key = arr[1].trim();
+    console.log('takePictureCallBack', key, url);
+
+    switch (key) {
+      case 'businessLicense':
+        businessLicense.value.addImage(url);
+        break;
+      case 'legalIdCard':
+        legalIdCard.value.addImage(url);
+        break;
+      case 'operatorIdCard':
+        operatorIdCard.value.addImage(url);
+        break;
+      case 'licensePermit':
+        licensePermit.value.addImage(url);
+        break;
+    }
+  };
+
+  const onUpload1 = (key, val) => {
     console.log('onUpload');
     console.log(key, val);
     form[key] = val;
-    console.log(form[key]);
+  };
+  const onUpload2 = () => {
+    console.log('onUpload2');
+  };
+  const onUpload3 = () => {
+    console.log('onUpload3');
+  };
+  const onUpload4 = () => {
+    console.log('onUpload4');
   };
 </script>
 
@@ -121,11 +161,14 @@
               key="businessLicense"
             /> -->
             <self-uploader
+              ref="businessLicense"
+              name="businessLicense"
               :modelValue="form.businessLicense"
               @update:modelValue="(newVal) => (form.businessLicense = newVal)"
               :uploadPosition="uploadFileDictionary"
-              @onUpload="(val) => onUpload('businessLicense', val)"
+              @onUpload="(val) => onUpload1('businessLicense', val)"
               :max-count="1"
+              typeID="111"
               key="businessLicense"
             />
           </template>
@@ -134,10 +177,13 @@
         <van-field label="法定代表人身份证">
           <template #input>
             <self-uploader
+              ref="legalIdCard"
+              name="legalIdCard"
               v-model="form.legalIdCard"
               :uploadPosition="uploadFileDictionary"
-              @onUpload="onUpload"
+              @onUpload="onUpload2"
               :max-count="1"
+              typeID="222"
               key="legalIdCard"
             />
           </template>
@@ -146,10 +192,13 @@
         <van-field label="经办人身份证">
           <template #input>
             <self-uploader
+              ref="operatorIdCard"
+              name="operatorIdCard"
               v-model="form.operatorIdCard"
               :uploadPosition="uploadFileDictionary"
-              @onUpload="onUpload"
+              @onUpload="onUpload3"
               :max-count="1"
+              typeID="333"
               key="operatorIdCard"
             />
           </template>
@@ -158,10 +207,13 @@
         <van-field label="开户许可证">
           <template #input>
             <self-uploader
+              ref="licensePermit"
+              name="licensePermit"
               v-model="form.licensePermit"
               :uploadPosition="uploadFileDictionary"
-              @onUpload="onUpload"
+              @onUpload="onUpload4"
               :max-count="1"
+              typeID="444"
               key="licensePermit"
             />
           </template>
